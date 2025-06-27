@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛡️ Minimal eCommerce — Admin Panel
 
-## Getting Started
+Panneau d’administration **Next.js 15 / TypeScript** permettant de piloter la boutique ▶️ [richazim/minimal-ecommerce](https://github.com/richazim/minimal-ecommerce).  
+Il offre un **dashboard en temps réel**, la gestion complète des produits, commandes et utilisateurs, ainsi qu’un système de téléchargement sécurisé pour les produits numériques.
 
-First, run the development server:
+---
+
+## ✨ Fonctionnalités clés
+
+| Domaine       | Détails                                                                 |
+|--------------|-------------------------------------------------------------------------|
+| **Dashboard** | Cartes (CA, ventes, clients) avec agrégations Prisma                   |
+| **Produits**  | CRUD complet : nom, prix, stock, visuels                               |
+| **Commandes** | Suivi des paiements, statut, vérification des téléchargements         |
+| **Utilisateurs** | Liste clients + activité                                           |
+| **Sécurité**  | Prisma ORM, validation stricte via Zod                                 |
+| **UI**        | Tailwind CSS + Shadcn UI (Radix + lucide-react)                        |
+
+---
+
+## 🛠️ Stack technique
+
+| Couche         | Techno                          |
+|----------------|---------------------------------|
+| Framework      | **Next.js 15 (App Router)**     |
+| Langage        | **TypeScript 5**                |
+| UI             | Tailwind CSS · Shadcn UI        |
+| Icons          | Lucide-react                    |
+| Data & ORM     | Prisma 6.9 + PostgreSQL         |
+| Validation     | Zod                             |
+| Déploiement    | Vercel                          |
+
+---
+
+## 📂 Structure du projet
+
+src/
+├─ app/ # Pages App Router (routes admin)
+├─ actions/ # Server Actions (queries & mutations)
+├─ components/ # UI partagée + composants métiers
+├─ db/ # Client Prisma & config DB
+├─ lib/ # Utilitaires
+└─ generated/prisma/ # Prisma client généré
+prisma/schema.prisma # Modèle de données
+tailwind.config.ts
+
+---
+
+## 🔧 Installation locale
 
 ```bash
+# 1. Cloner le dépôt
+git clone https://github.com/richazim/minimal-ecommerce-admin-panel.git
+cd minimal-ecommerce-admin-panel
+
+# 2. Installer les dépendances
+npm install
+
+# 3. Configurer les variables d'environnement
+cp .env.example .env.local
+# Remplir :
+# DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DB
+# NEXT_PUBLIC_STORE_URL=https://minimal-ecommerce.vercel.app
+
+# 4. Générer le client Prisma & lancer
+npx prisma migrate deploy
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- Déploiement sur Vercel
+Crée un projet sur Vercel.
+Renseigne les variables d’environnement dans Settings > Environment Variables.
+Pousse ton repo — build & déploiement automatiques via Next.js.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🧰 Bonnes pratiques (SOLID / DRY)
+Organisation modulaire par domaine (products, orders, users)
+Validation stricte avec Zod pour toutes les entrées utilisateur
+Hooks serveur dédiés pour les appels Prisma
+Types partagés générés automatiquement
+Responsabilités séparées : chaque action = une responsabilité
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📈 Roadmap
+ Authentification & RBAC (Clerk ou NextAuth)
+ Graphiques analytics (Recharts)
+ Webhooks Stripe (états des commandes)
+ Support i18n + multi-devises
+ GitHub Actions CI (lint + test + check Prisma)
 
-## Learn More
+🤝 Contribuer
+Fork ce repo
+Crée une branche feature/ma-feature
+Code + npm run lint + npm run format
+Fais une PR avec un titre clair + captures si nécessaire
 
-To learn more about Next.js, take a look at the following resources:
+📄 Licence
+Projet sous licence MIT — libre de l’utiliser, modifier et distribuer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🔗 Liens utiles
+🛍️ Front minimal-ecommerce
+⚙️ Admin demo : https://minimal-ecommerce-admin-panel.vercel.app
+🧾 Stripe Checkout Docs
+🧱 Prisma ORM
+🎨 Shadcn UI -->
