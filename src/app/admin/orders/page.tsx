@@ -29,7 +29,7 @@ import { DeleteOrderDropdownItem } from "@/components/Order/DeleteOrderDropdownI
     })
   }
   
-  export default function OrdersPage() {
+  export default async function OrdersPage() {
     return (
       <>
         <PageHeader>Sales</PageHeader>
@@ -56,7 +56,7 @@ import { DeleteOrderDropdownItem } from "@/components/Order/DeleteOrderDropdownI
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orders.map(order => (
+          {orders.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.product.name}</TableCell>
               <TableCell>{order.user.email}</TableCell>
