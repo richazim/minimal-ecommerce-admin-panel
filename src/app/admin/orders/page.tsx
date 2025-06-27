@@ -39,7 +39,7 @@ import { DeleteOrderDropdownItem } from "@/components/Order/DeleteOrderDropdownI
     )
   }
   
-  async function OrdersTable() {
+  export async function OrdersTable() {
     const orders = await getOrders()
   
     if (orders.length === 0) return <p>No sales found</p>
