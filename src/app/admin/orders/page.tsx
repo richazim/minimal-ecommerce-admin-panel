@@ -1,4 +1,3 @@
-"use server"
 import {
     Table,
     TableBody,
@@ -31,54 +30,50 @@ import { DeleteOrderDropdownItem } from "@/components/Order/DeleteOrderDropdownI
   }
   
   export default async function OrdersPage() {
+    const orders = await getOrders()
+  
     return (
       <>
         <PageHeader>Sales</PageHeader>
-        <OrdersTable />
+        {orders.length === 0 ? (
+          <p>No sales found</p>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Product</TableHead>
+                <TableHead>Customer</TableHead>
+                <TableHead>Price Paid</TableHead>
+                <TableHead className="w-0">
+                  <span className="sr-only">Actions</span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {orders.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell>{order.product.name}</TableCell>
+                  <TableCell>{order.user.email}</TableCell>
+                  <TableCell>
+                    {formatCurrency(order.pricePaidInCents / 100)}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <MoreVertical />
+                        <span className="sr-only">Actions</span>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DeleteOrderDropdownItem id={order.id} />
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </>
-    )
-  }
-  
-  export async function OrdersTable() {
-    const orders = await getOrders()
-  
-    if (orders.length === 0) return <p>No sales found</p>
-  
-    return (
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Product</TableHead>
-            <TableHead>Customer</TableHead>
-            <TableHead>Price Paid</TableHead>
-            <TableHead className="w-0">
-              <span className="sr-only">Actions</span>
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {orders.map((order) => (
-            <TableRow key={order.id}>
-              <TableCell>{order.product.name}</TableCell>
-              <TableCell>{order.user.email}</TableCell>
-              <TableCell>
-                {formatCurrency(order.pricePaidInCents / 100)}
-              </TableCell>
-              <TableCell className="text-center">
-                <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <MoreVertical />
-                    <span className="sr-only">Actions</span>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DeleteOrderDropdownItem id={order.id} />
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
     )
   }
   
