@@ -8,13 +8,13 @@ import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import Image from "next/image"
 import { Product } from "@/generated/prisma"
-import { addProduct } from "../../actions/queries/products/addProduct"
-import { updateProduct } from "../../actions/queries/products/updateProduct"
+import { addProductToDB } from "../../actions/queries/products/addProductToDB"
 import { formatCurrency } from "@/format"
+import { updateProductFromDB } from "@/actions/queries/products/updateProductFromDB"
 
 export function ProductForm({ product } : { product?: Product | null }) {
-  const [error, action] = useActionState(
-    product == null ? addProduct : updateProduct.bind(null, product.id),
+  const [errorState, action] = useActionState(
+    product == null ? addProductToDB : updateProductFromDB.bind(null, product.id),
     {}
   )
   
@@ -33,7 +33,7 @@ export function ProductForm({ product } : { product?: Product | null }) {
           required
           defaultValue={product?.name || ""}
         />
-        {error.name && <div className="text-destructive">{error.name}</div>}
+        {errorState.name && <div className="text-destructive">{errorState.name}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="priceInCents">Price In Cents</Label>
@@ -50,8 +50,8 @@ export function ProductForm({ product } : { product?: Product | null }) {
         <div className="text-muted-foreground">
           {formatCurrency((priceInCents || 0) / 100)}
         </div>
-        {error.priceInCents && (
-          <div className="text-destructive">{error.priceInCents}</div>
+        {errorState.priceInCents && (
+          <div className="text-destructive">{errorState.priceInCents}</div>
         )}
       </div>
       <div className="space-y-2">
@@ -62,8 +62,8 @@ export function ProductForm({ product } : { product?: Product | null }) {
           required
           defaultValue={product?.description}
         />
-        {error.description && (
-          <div className="text-destructive">{error.description}</div>
+        {errorState.description && (
+          <div className="text-destructive">{errorState.description}</div>
         )}
       </div>
       <div className="space-y-2">
@@ -72,7 +72,7 @@ export function ProductForm({ product } : { product?: Product | null }) {
         {product != null && (
           <div className="text-muted-foreground">{product.filePath}</div>
         )}
-        {error.file && <div className="text-destructive">{error.file}</div>}
+        {errorState.file && <div className="text-destructive">{errorState.file}</div>}
       </div>
       <div className="space-y-2">
         <Label htmlFor="image">Image</Label>
@@ -85,7 +85,7 @@ export function ProductForm({ product } : { product?: Product | null }) {
             alt="Product Image"
           />
         )}
-        {error.image && <div className="text-destructive">{error.image}</div>}
+        {errorState.image && <div className="text-destructive">{errorState.image}</div>}
       </div>
       <SubmitButton />
     </form>

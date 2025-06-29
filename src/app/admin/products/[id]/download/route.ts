@@ -2,7 +2,7 @@ import db from "@/db/db"
 import { notFound } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 import fs from "fs/promises"
-import { extractFilenameFromPath } from "@/lib/utils/filename"
+import { extractFilenameFromPath } from "@/utils/filename"
 
 export async function GET(
   req: NextRequest,

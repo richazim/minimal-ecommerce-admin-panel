@@ -14,7 +14,7 @@ import {
   } from "@/components/ui/dropdown-menu"
   import { MoreVertical } from "lucide-react"
 import { PageHeader } from "@/components/PageHeader"
-import { formatNumber } from "../../../lib/utils/format"
+import { formatNumber } from "../../../utils/format"
 import { formatCurrency } from "@/format"
 import { DeleteUserDropdownItem } from "@/components/User/DeleteUserDropdownItem"
   

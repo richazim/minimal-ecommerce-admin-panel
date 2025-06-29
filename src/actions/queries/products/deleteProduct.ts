@@ -4,7 +4,7 @@ import db from "@/db/db"
 import fs from "fs/promises"
 import { notFound } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import { extractFilenameFromPath } from "@/lib/utils/filename"
+import { extractFilenameFromPath } from "@/utils/filename"
 
 
 export async function deleteProduct(id: string) {

@@ -18,7 +18,7 @@ import {
 import { DeleteProductDropdownItem } from "@/components/Product/DeleteProductItem"
 import { ToggleProductAvailabilityItem } from "../Product/ToggleAvailabilityItem"
 import { formatCurrency } from "@/format"
-import { formatNumber } from "../../lib/utils/format"
+import { formatNumber } from "../../utils/format"
 import Link from "next/link"
 
 export async function ProductsTable() {

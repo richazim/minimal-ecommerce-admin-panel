@@ -2,7 +2,7 @@ import { formatCurrency } from "@/format"
 import { fetchTotalSalesMetrics } from "../actions/queries/orders/fetchTotalSalesMetrics"
 import { fetchProductAvailabilityCounts } from "../actions/queries/products/fetchProductAvailabilityCounts"
 import { fetchUserMetrics } from "../actions/queries/users/fetchUserMetrics"
-import { formatNumber } from "../lib/utils/format"
+import { formatNumber } from "../utils/format"
 import { DashboardCard } from "@/components/Card/DashboardCard"
 
 
